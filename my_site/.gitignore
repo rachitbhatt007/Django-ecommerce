@@ -1,0 +1,9 @@
+*.env
+ecom_env
+*.pyc
+*.idea/
+../*
+*.xml
+*.log
+.idea/
+__pycache__

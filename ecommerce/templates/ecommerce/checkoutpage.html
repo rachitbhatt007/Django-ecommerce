@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Checkoutpage{% endblock title %}
+
+{% block content %}
+<div class="container">
+<div class="row">
+<h1>Checkout</h1>
+<div class="col-8">
+<form method="post">
+{% csrf_token %}
+{{form|crispy}}
+<button class="btn btn-primary"> Place order</button>
+</form>
+</div>
+
+<div class="col-4">
+{% include "ecommerce/includes/summary.html"  %}
+  </div>
+  </div>
+  </div>
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Profile page
+{% endblock title %}
+
+
+{% block content %}
+<div class="container m-5">
+<h1>User addresses</h1>
+{% for address in addresses %}
+{% if address.default %}
+<p><span class = "bg-danger p-1 mx-4">default</span><strong>id:{{address.id}}.</strong> {{address.user_address}}</p>
+<hr></hr>
+{%else%}
+<p><strong>id:{{address.id}}.</strong>{{address.user_address}}</p>
+<form method="POST">
+{% csrf_token %}
+<button class="btn btn-danger">Make default</button>
+<input type="hidden" value={{address.id}} name=address>
+</form>
+<hr></hr>
+{% endif %}
+{% endfor %}
+<a href="{% url 'orders' %}" class="btn btn-primary">My orders</a>
+</div>
+{% endblock content %}

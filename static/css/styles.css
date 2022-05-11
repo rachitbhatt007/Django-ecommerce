@@ -1,0 +1,16 @@
+body{
+    margin:0;
+}
+
+a{
+    text-decoration: None;
+}
+a:hover{
+    color:rgb(180, 22, 22)
+}
+
+h1{
+    text-align: center;
+    color:#007bff;
+    margin-top: 10px;
+}

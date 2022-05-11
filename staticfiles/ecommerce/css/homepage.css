@@ -1,0 +1,18 @@
+#filters{
+    border: 1px solid #007bff;;
+}
+h3{
+    color:#007bff;
+}
+.card{
+    border:1px solid #007bff;
+}
+
+.card-img-top{
+    height:250px;
+}
+
+.pagination{
+    display: flex;
+    justify-content: center;
+}

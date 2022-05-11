@@ -1,0 +1,25 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: Password reset on 127.0.0.1:8000
+From: webmaster@localhost
+To: prakhar@gmail.com
+Date: Thu, 18 Nov 2021 08:59:49 -0000
+Message-ID: <163722598906.89444.2896482865320178916@ttnpl>
+
+
+You're receiving this email because you requested a password reset for your user account at 127.0.0.1:8000.
+
+Please go to the following page and choose a new password:
+
+http://127.0.0.1:8000/account/reset/Nw/awawzp-7af48f2f385ada1f4c83672e6b989c88/
+
+Your username, in case you’ve forgotten: prakhar
+
+Thanks for using our site!
+
+The 127.0.0.1:8000 team
+
+
+
+-------------------------------------------------------------------------------

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Product Detail{% endblock title %}
+
+{% block content %}
+<div class="container">
+<h1>Product Detail</h1>
+<div class="container row">
+<div class="col-2">
+<img class = "img-fluid" src="{{product.thumbnail.url}}" alt="">
+</div>
+<div class="col-6">
+<h3>{{product.name}}</h3>
+<p>{{product.description}}</p>
+<p>Available quantity:{{product.quantity}}</p>
+<h4>Rs.{{product.price}}</h4>
+
+{% if product.quantity is not 0 %}
+<form action="{% url 'addtocart' product.slug %}" method="post">  
+{% csrf_token %}
+    {{form}}
+    <button class="btn btn-primary">Add to cart</button>
+</form>
+{% else %}
+<p class="bg-danger">Product is out of stock</p>
+{% endif %}
+</div>
+</div>
+</div>
+{% endblock content %}

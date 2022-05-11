@@ -1,0 +1,20 @@
+<div class="card m-3">
+  <div class="card-body">
+    <h5 class="card-title">Order Summary</h5>
+    <hr></hr>
+    {% for order_item in order_items  %}
+    <p class="card-text"><strong>{{order_item.product.name}} * {{order_item.quantity}} : Rs.{{order_item.get_total}}</strong></p>
+    {% endfor %}
+    <hr></hr>
+    <p class="card-text"><strong>Total items :{{order.get_total_items}} items</strong></p>
+    <p class="card-text"><strong>Total cart value :Rs.{{order.get_cart_total}}{{order.payable_value}}</strong></p>
+    {% if cart %}
+    <div>
+        <a href="{% url 'index' %}" class="btn btn-primary"> Continue shopping </a>
+        <a href="{% url 'checkout' %}" class="btn btn-primary"> Checkout </a>
+    </div>
+    
+    {% endif %}
+
+  </div>
+</div>

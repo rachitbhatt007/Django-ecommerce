@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title%}Your orders{% endblock title%}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'ecommerce/css/cartpage.css' %}">
+{% endblock css_files %}
+
+{% block content %}
+<div class="container">
+<h1>ORDERS</h1>
+{% for order in  orders%}
+<h3>OrderId : {{order.id}}</h3>
+<div class="row">
+<div class="col-8">
+{% for order_item in order.items.all %}
+<div class="card m-3">
+<div class="row">
+    <div class="col-5">
+    <img class="img-fluid" src="{{order_item.product.thumbnail.url}}"/>
+    </div>
+  <div class="card-body col-5 offset-2">
+    <a href=""><h5 class="card-title">{{order_item.product.name}}</h5></a>
+    <p class="card-text"><strong>Quantity</strong>: {{order_item.quantity}} </p>
+    <p class="card-text"><strong>Unit Price</strong>: Rs.{{order_item.product.price}}</p>
+    <p class="card-text"><strong>Total Price</strong>: Rs.{{order_item.get_total}}</p>
+    
+  </div>
+</div>
+</div>
+{% endfor %}
+</div>
+<div class="col-4">
+{% comment %} <h5>order total: Rs{{order.get_cart_total}}</h5> {% endcomment %}
+{% include "ecommerce/includes/summary.html" %}
+</div>
+</div>
+<hr></hr>
+{% endfor %}
+
+</div>
+{% endblock content %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Cartpage{% endblock title %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'ecommerce/css/cartpage.css' %}">
+{% endblock css_files %}
+
+
+
+{% block content %}
+<h1>Cartpage</h1>
+<div class="row">
+    <div class="col-8">
+
+
+{% for order_item in order_items %}
+<div class="card m-3">
+<div class="row">
+    <div class="col-5">
+    <img class="img-fluid" src="{{order_item.product.thumbnail.url}}"/>
+    </div>
+  <div class="card-body col-5 offset-2">
+    <a href="{% url 'product_detail' order_item.product.slug%}"><h5 class="card-title">{{order_item.product.name}}</h5></a>
+    <form method = "post" action="{% url 'removefromcart' order_item.product.slug%}">
+    {% csrf_token %}
+    <p class="card-text"><strong>Quantity</strong>: {{order_item.quantity}} <button class="mx-1 p-0"><i class="fas fa-caret-down"></i></button></p>
+    </form>
+    <p class="card-text"><strong>Unit Price</strong>: Rs.{{order_item.product.price}}</p>
+    <p class="card-text"><strong>Total Price</strong>: Rs.{{order_item.get_total}}</p>
+    
+    <a href="{% url 'removefromcart' order_item.product.slug%}" class="btn btn-danger"><i class="fas fa-shopping-cart"></i>Remove from cart</a>
+    
+  </div>
+</div>
+</div>
+{%empty%}
+
+  <p>Your cart is empty</p>
+
+{% endfor %}
+
+
+
+{% if order.items.all  %}
+</div>
+<div class="col-4">
+{% include "ecommerce/includes/summary.html" with cart=True %}
+
+</div>
+</div>
+
+{% endif %}
+{% endblock content %}

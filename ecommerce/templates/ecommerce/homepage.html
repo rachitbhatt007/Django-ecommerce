@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Homepage{% endblock title %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'ecommerce/css/homepage.css' %}">
+{% endblock css_files %}
+
+{% block content %}
+<div class="container">
+<h1>Products</h1>
+<div class="row">
+    <div id = "filters" class="col-lg-2 col-md-4 col-sm-4">
+        <h3>Sort by</h3>
+        <hr></hr>
+        <ul >
+           <a href="?sort=product_name"><li>Product name</li></a>
+            <a href="?sort=price_asc"><li>Sort low to high</li></a>
+            <a href="?sort=price_des"><li>Sort high to low</li></a>
+            <a href="{{ request.path }}"><li>Remove all filters</li></a>
+
+        </ul>
+    </div>
+<div class="col-lg-10 col-md-8 col-sm-6 row">
+{% for product in products %}
+<div class="col m-3">
+
+<a href="{% url 'product_detail' product.slug %}">
+<div class="card" style="width: 14rem; height:25rem;">
+    <img src="{{product.thumbnail.url}}" class="card-img-top" alt="{{product.name}}">
+    <div class="card-body">
+      <h5 class="card-title">{{product.name}}</h5>
+      <p class="card-text"><strong>Rs.{{product.price}}</strong></p>
+      {% if product.quantity is 0 %}
+      <a><p class="d-inline bg-danger">Product is out of stock</p></a>
+      {%else%}
+      <a><form action="{% url 'addtocart' product.slug %}" method="post">  
+        {% csrf_token %}
+        <input type="hidden" value={{product.slug}} name ="product">
+        <button class="btn btn-primary my-4"><i class="fas fa-shopping-cart"></i>Add to cart</button>
+    </form></a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+</a>
+{% empty %}
+<h5>No products to show with name "{{search_text}}"</p>
+{% endfor %}
+</div>
+</div>
+<nav class="row" aria-label="Page navigation">
+  <ul class="pagination m-3 >
+{% if products.has_previous %}
+<li class="page-item"><a class="page-link"
+{% if sort_param %} href="?sort={{sort_param}}&page={{products.previous_page_number}}"
+{% else %} href="?page={{products.previous_page_number}}"
+{% endif %}>Previous</a></li>
+{% endif %}
+
+{% for i in total_pages %}
+<li class="page-item"><a class="page-link"
+{% if sort_param %} href="?sort={{sort_param}}&page={{forloop.counter}}"
+{% else %}href="?page={{forloop.counter}}" {% endif %}>{{forloop.counter}}</a></li>
+{% endfor %}
+
+{% if products.has_next %}
+<li class="page-item"><a class="page-link"
+{% if sort_param %}href="?sort={{sort_param}}&page={{products.next_page_number}}"
+{% else %}href="?page={{products.next_page_number}}"{% endif %}
+>Next</a></li>
+{% endif %}
+  </ul>
+</nav>
+
+</div>
+
+{% endblock content %}
