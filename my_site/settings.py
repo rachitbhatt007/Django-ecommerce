@@ -28,7 +28,8 @@ DEBUG = environ.get('IS_DEVELOPMENT',True)
 
 ALLOWED_HOSTS = [
     environ.get("APP_HOST"),
-    '127.0.0.1'
+    '127.0.0.1',
+    '0.0.0.0'
 ]
 
 
